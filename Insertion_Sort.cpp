@@ -1,35 +1,30 @@
 #include <iostream>
-#include <utility>
-void selectionSort(int arr[], int n) {
-    for (int i = 0; i < n - 1; i++) {
-        int minIndex = i;
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j; 
-            }
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i]; 
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
         }
-        if (minIndex != i) {
-            std::swap(arr[i], arr[minIndex]);
-        }
+        arr[j + 1] = key; 
     }
 }
-void printArray(const int arr[], int n) {
+void printArray(int arr[], int n) {
     for (int i = 0; i < n; i++) {
         std::cout << arr[i] << " ";
     }
-    std::cout << "\n";
+    std::cout << std::endl;
 }
 int main() {
-    int data[] = {64, 25, 12, 22, 11};
-    int size = sizeof(data) / sizeof(data[0]);
-    
+    int arr[] = {12, 11, 13, 5, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
     std::cout << "Original array: ";
-    printArray(data, size);
-    
-    selectionSort(data, size);
-    
-    std::cout << "Sorted array using Selection Sort: ";
-    printArray(data, size);
-    
+    printArray(arr, n);
+    insertionSort(arr, n);
+    std::cout << "Sorted array:   ";
+    printArray(arr, n);
     return 0;
 }
+
